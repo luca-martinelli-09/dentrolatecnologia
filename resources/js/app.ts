@@ -4,11 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-import { createApp } from 'vue';
-import router from './router';
-import App from './layouts/App.vue'
+import { createApp } from "vue";
+import router from "./router";
+import App from "./layouts/App.vue";
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(router)
-app.mount("#app")
+app.use(router);
+app.mount("#app");

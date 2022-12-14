@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipi_contattos', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('TipiContatto', function (Blueprint $table) {
+            $table->string('CodTipoContatto', 100)->primary();
+            $table->string('NomeTipoContatto', 300);
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipi_contattos');
+        Schema::dropIfExists('TipiContatto');
     }
 };

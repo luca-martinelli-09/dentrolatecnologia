@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -28,8 +31,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-};
-</script>
