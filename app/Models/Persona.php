@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoContatto extends Model {
+class Persona extends Model {
     use HasFactory;
 
     /**
@@ -13,14 +13,14 @@ class TipoContatto extends Model {
      *
      * @var string
      */
-    protected $table = 'TipiContatto';
+    protected $table = 'Persone';
 
     /**
      * The primary key associated with the table.
      *
      * @var string
      */
-    protected $primaryKey = 'CodTipoContatto';
+    protected $primaryKey = 'IDPersona';
 
     /**
      * Indicates if the model's ID is auto-incrementing.

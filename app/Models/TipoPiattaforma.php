@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TipoPiattaforma extends Model
-{
+class TipoPiattaforma extends Model {
     use HasFactory;
 
     /**

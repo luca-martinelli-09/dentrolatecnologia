@@ -11,9 +11,12 @@ return new class extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('TipiContatto', function (Blueprint $table) {
-            $table->string('CodTipoContatto', 100)->primary();
-            $table->string('NomeTipoContatto', 300);
+        Schema::create('Amministratori', function (Blueprint $table) {
+            $table->id('IDAmministratore');
+            $table->string('Nome', 300);
+            $table->string('Cognome', 300);
+            $table->string('Email', 300);
+            $table->string('Password', 35);
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('TipiContatto');
+        Schema::dropIfExists('Amministratori');
     }
 };

@@ -11,9 +11,12 @@ return new class extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('TipiContatto', function (Blueprint $table) {
-            $table->string('CodTipoContatto', 100)->primary();
-            $table->string('NomeTipoContatto', 300);
+        Schema::create('TipiPersona', function (Blueprint $table) {
+            $table->string('CodTipoPersona', 100)->primary();
+            $table->string('NomeTipoPersona', 300);
+            $table->string('RuoloPersona', 300);
+            $table->integer('Priorita')->default(0);
+            $table->boolean('NascondiTitolo')->default(false);
         });
     }
 
@@ -23,6 +26,6 @@ return new class extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('TipiContatto');
+        Schema::dropIfExists('TipiPersona');
     }
 };

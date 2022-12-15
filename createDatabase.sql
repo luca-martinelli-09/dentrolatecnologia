@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS LogModifiche (
 
 /* Anagrafe */
 
-CREATE TABLE IF NOT EXISTS TipoPersona (
+CREATE TABLE IF NOT EXISTS TipiPersona (
   CodTipoPersona VARCHAR(100) NOT NULL,
   NomeTipoPersona VARCHAR(300) NOT NULL,
   RuoloPersona VARCHAR(300) NOT NULL,
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS TipoPersona (
   PRIMARY KEY (CodTipoPersona)
 );
 
-INSERT INTO TipoPersona (CodTipoPersona, NomeTipoPersona, RuoloPersona, Priorita, NascondiTitolo) VALUES
+INSERT INTO TipiPersona (CodTipoPersona, NomeTipoPersona, RuoloPersona, Priorita, NascondiTitolo) VALUES
   ('autori', 'Redazione', 'Autore', 0, 0),
   ('aziende', 'Aziende', 'Azienda', 4, 0),
   ('collaboratori', 'Collaboratori', 'Collaboratore', 1, 1),
@@ -161,49 +161,49 @@ INSERT INTO TipoPersona (CodTipoPersona, NomeTipoPersona, RuoloPersona, Priorita
   ('ospiti-amici', 'Ospiti', 'Ospite', 3, 1);
 
 CREATE TABLE IF NOT EXISTS Persone (
-  CodPersona VARCHAR(100) NOT NULL,
+  IDPersona VARCHAR(100) NOT NULL,
   Nome VARCHAR(300) NOT NULL,
-  Cognome VARCHAR(300) NOT NULL,
+  Cognome VARCHAR(300),
   Biografia VARCHAR(1000),
   RuoloPersona VARCHAR(300),
   CodTipoPersona VARCHAR(100) NOT NULL,
 
-  PRIMARY KEY (CodPersona),
-  FOREIGN KEY (CodTipoPersona) REFERENCES TipoPersona(CodTipoPersona) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (IDPersona),
+  FOREIGN KEY (CodTipoPersona) REFERENCES TipiPersona(CodTipoPersona) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ContattiPersone (
   ID INT(11) NOT NULL AUTO_INCREMENT,
-  CodPersona VARCHAR(100) NOT NULL,
+  IDPersona VARCHAR(100) NOT NULL,
   Nome VARCHAR(300) NOT NULL,
   Link VARCHAR(700) NOT NULL,
   CodTipoContatto VARCHAR(100) NOT NULL,
   
   PRIMARY KEY (ID),
-  FOREIGN KEY (CodPersona) REFERENCES Persone(CodPersona) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (IDPersona) REFERENCES Persone(IDPersona) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (CodTipoContatto) REFERENCES TipiContatto(CodTipoContatto) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS PersoneCorrelate (
-  CodPersona VARCHAR(100) NOT NULL,
-  CodPersonaCorrelata VARCHAR(100) NOT NULL,
+  IDPersona VARCHAR(100) NOT NULL,
+  IDPersonaCorrelata VARCHAR(100) NOT NULL,
   
-  PRIMARY KEY (CodPersona, CodPersonaCorrelata),
-  FOREIGN KEY (CodPersona) REFERENCES Persone(CodPersona) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (CodPersonaCorrelata) REFERENCES Persone(CodPersona) ON DELETE CASCADE ON UPDATE CASCADE
+  PRIMARY KEY (IDPersona, IDPersonaCorrelata),
+  FOREIGN KEY (IDPersona) REFERENCES Persone(IDPersona) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (IDPersonaCorrelata) REFERENCES Persone(IDPersona) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 /* Registrazioni */
 
-CREATE TABLE IF NOT EXISTS AccessoRegistrazioni (
+CREATE TABLE IF NOT EXISTS AccessiRegistrazioni (
   IDRegistrazione INT AUTO_INCREMENT NOT NULL,
   Password VARCHAR(35) NOT NULL,
-  CodOspite VARCHAR(100) DEFAULT NULL,
+  IDOspite VARCHAR(100) DEFAULT NULL,
   DataInizio DATETIME NOT NULL,
   DataFine DATETIME NOT NULL,
   
   PRIMARY KEY (IDRegistrazione),
-  FOREIGN KEY (CodOspite) REFERENCES Persone(CodPersona) ON DELETE SET NULL ON UPDATE CASCADE
+  FOREIGN KEY (IDOspite) REFERENCES Persone(IDPersona) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 /* Puntate */
@@ -223,7 +223,7 @@ CREATE TABLE IF NOT EXISTS Episodi (
 );
 
 CREATE TABLE IF NOT EXISTS TokenAccesso (
-  TokenAccesso VARCHAR(35) NOT NULL,
+  TokenAccesso VARCHAR(36) NOT NULL,
   Stagione INT NOT NULL,
   Episodio INT NOT NULL,
   DataScadenza DATETIME DEFAULT NULL,
@@ -375,13 +375,13 @@ CREATE TABLE IF NOT EXISTS TestiIndice (
 
 CREATE TABLE IF NOT EXISTS AutoriIndice (
   IDIndice VARCHAR(100) NOT NULL,
-  CodPersona VARCHAR(100) NOT NULL,
+  IDPersona VARCHAR(100) NOT NULL,
   Voce INT(1) NOT NULL DEFAULT 0,
   Priorita INT(3) NOT NULL DEFAULT 0,
   
-  PRIMARY KEY (IDIndice, CodPersona),
+  PRIMARY KEY (IDIndice, IDPersona),
   FOREIGN KEY (IDIndice) REFERENCES Indice(IDIndice) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (CodPersona) REFERENCES Persone(CodPersona) ON DELETE CASCADE ON UPDATE CASCADE
+  FOREIGN KEY (IDPersona) REFERENCES Persone(IDPersona) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS ArgomentiIndice (

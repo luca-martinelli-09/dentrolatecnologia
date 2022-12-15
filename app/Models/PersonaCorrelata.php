@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contatto extends Model {
+class PersonaCorrelata extends Model {
     use HasFactory;
 
     /**
@@ -13,14 +13,7 @@ class Contatto extends Model {
      *
      * @var string
      */
-    protected $table = 'Contatti';
-
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'IDContatto';
+    protected $table = 'PersoneCorrelate';
 
 
     // Disable timestamps
