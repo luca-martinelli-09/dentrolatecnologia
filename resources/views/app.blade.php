@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
@@ -10,9 +10,7 @@
 </head>
 
 <body>
-    <div id="app">
-        <example-component />
-    </div>
+    <div id="app"></div>
     @vite('resources/js/app.ts')
 </body>
 
