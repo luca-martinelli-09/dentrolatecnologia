@@ -232,25 +232,26 @@ CREATE TABLE IF NOT EXISTS TokenAccesso (
   FOREIGN KEY (Stagione, Episodio) REFERENCES Episodi(Stagione, Episodio) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS LinksEpisodi (
+CREATE TABLE IF NOT EXISTS LinkEpisodi (
   Stagione INT NOT NULL,
   Episodio INT NOT NULL,
   CodTipoPiattaforma VARCHAR(100) NOT NULL,
+  Link VARCHAR(700) NOT NULL,
   
   PRIMARY KEY (Stagione, Episodio, CodTipoPiattaforma),
   FOREIGN KEY (Stagione, Episodio) REFERENCES Episodi(Stagione, Episodio) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (CodTipoPiattaforma) REFERENCES TipiPiattaforma(CodTipoPiattaforma) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS TipoCrediti (
+CREATE TABLE IF NOT EXISTS TipiCrediti (
   CodTipoCredito VARCHAR(100) NOT NULL,
-  NomeCredito VARCHAR(300) NOT NULL,
+  NomeTipoCredito VARCHAR(300) NOT NULL,
   OrdineCredito INT NOT NULL DEFAULT 0,
   
   PRIMARY KEY (CodTipoCredito)
 );
 
-INSERT INTO TipoCrediti (CodTipoCredito, NomeCredito, OrdineCredito) VALUES
+INSERT INTO TipiCrediti (CodTipoCredito, NomeCredito, OrdineCredito) VALUES
   ('brani', 'Brani', 0),
   ('immagini', 'Immagini', 1);
 
@@ -263,7 +264,7 @@ CREATE TABLE IF NOT EXISTS Crediti (
   
   PRIMARY KEY (IDCredito),
   FOREIGN KEY (Stagione, Episodio) REFERENCES Episodi(Stagione, Episodio) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (CodTipoCredito) REFERENCES TipoCrediti(CodTipoCredito) ON DELETE SET NULL ON UPDATE CASCADE
+  FOREIGN KEY (CodTipoCredito) REFERENCES TipiCrediti(CodTipoCredito) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Repliche (
@@ -506,10 +507,19 @@ CREATE TABLE IF NOT EXISTS Newsletter (
   ID VARCHAR(35) NOT NULL,
   Email VARCHAR(700) NOT NULL,
   DataIscrizione DATETIME DEFAULT CURRENT_TIMESTAMP,
-  UltimoInvio DATETIME DEFAULT CURRENT_TIMESTAMP,
   Test INT(1) DEFAULT 0,
   
   PRIMARY KEY (ID)
+);
+
+CREATE TABLE IF NOT EXISTS NewsletterInviate (
+  ID INT NOT NULL AUTO_INCREMENT,
+  IDDestinatario VARCHAR(35) NOT NULL,
+  DataInvio DATETIME DEFAULT CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (ID),
+  FOREIGN KEY (Stagione, Episodio) REFERENCES Episodi(Stagione, Episodio) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (IDDestinatario) REFERENCES Newsletter(ID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 /* Blog */
