@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder {
             TipoPiattaformaSeeder::class,
             LinkPodcastSeeder::class,
             TipoPersonaSeeder::class,
+            ArgomentoSeeder::class,
+            TipoCreditoSeeder::class,
+            TipoRiferimentoSeeder::class,
         ]);
     }
 }
