@@ -326,7 +326,7 @@ INSERT INTO Argomenti (CodArgomento, NomeArgomento, ColoreSfondo, ColoreTesto) V
 
 /* Indice */
 
-CREATE TABLE IF NOT EXISTS TipoRiferimenti (
+CREATE TABLE IF NOT EXISTS TipiRiferimenti (
   CodTipoRiferimento VARCHAR(100) NOT NULL,
   NomeRiferimento VARCHAR(300) NOT NULL,
   SottoIndice INT(1) NOT NULL DEFAULT 0,
@@ -334,7 +334,7 @@ CREATE TABLE IF NOT EXISTS TipoRiferimenti (
   PRIMARY KEY (CodTipoRiferimento)
 );
 
-INSERT INTO TipoRiferimenti (CodTipoRiferimento, NomeRiferimento, SottoIndice) VALUES
+INSERT INTO TipiRiferimenti (CodTipoRiferimento, NomeRiferimento, SottoIndice) VALUES
   ('chiacchierata', 'Chiacchierata', 0),
   ('intervista', 'Intervista', 0),
   ('notizia', 'Notizia', 0),
@@ -352,7 +352,7 @@ CREATE TABLE IF NOT EXISTS Indice (
   CodTipoRiferimento VARCHAR(100) DEFAULT 'notizia',
   
   PRIMARY KEY (IDIndice),
-  FOREIGN KEY (CodTipoRiferimento) REFERENCES TipoRiferimenti(CodTipoRiferimento) ON DELETE SET NULL ON UPDATE CASCADE,
+  FOREIGN KEY (CodTipoRiferimento) REFERENCES TipiRiferimenti(CodTipoRiferimento) ON DELETE SET NULL ON UPDATE CASCADE,
   FOREIGN KEY (Stagione, Episodio) REFERENCES Episodi(Stagione, Episodio) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
